@@ -1,9 +1,12 @@
 "use client"
 
+import { IconType } from "react-icons"
+
 
 interface ButtonProps {
     btnLabel: string,
     onSubmit: (e:React.MouseEvent<HTMLButtonElement>)=> void
+   
 }
 
 const Button: React.FC<ButtonProps> = ({btnLabel, onSubmit}) => {

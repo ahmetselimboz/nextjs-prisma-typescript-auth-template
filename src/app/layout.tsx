@@ -3,6 +3,8 @@ import { Nunito } from "next/font/google"
 import Navbar from "./components/navbar/Navbar"
 import MountedClient from "./components/MountedClient"
 import RegisterModal from "./components/modals/RegisterModal"
+import ReduxProvider from "./providers/ReduxProvider"
+import LoginModal from "./components/modals/LoginModal"
 
 
 const newFont = Nunito({
@@ -18,12 +20,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <title>Vacation Site</title>
       </head>
       <body className={newFont.className}>
-        <MountedClient>
-          {/* <Modal isOpen onSubmit={()=>{}} onClose={()=>{}} btnLabel="Kayıt Ol" title="KAYIT OL" /> */}
-          <RegisterModal/>
-          <Navbar />
-        </MountedClient>
-        {children}
+        <ReduxProvider>
+          <MountedClient>
+            <RegisterModal />
+            <LoginModal/>
+            <Navbar />
+          </MountedClient>
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   )

@@ -4,9 +4,12 @@ import { useState } from "react";
 import { FaRegStar } from "react-icons/fa";
 import UserMenuItem from "./UserMenuItem";
 import { MdPersonAdd, MdLogin } from 'react-icons/md';
+import { useAppDispatch } from "@/app/redux/hooks";
+import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
 const UserMenu = () => {
 
   const [openMenu, setOpenMenu] = useState(false)
+  const dispatch = useAppDispatch()
 
   return (
     <div className="flex items-center gap-5 cursor-pointer relative">
@@ -20,8 +23,8 @@ const UserMenu = () => {
       {
         openMenu && (
           <div className="absolute bg-gray-100 shadow-md shadow-gray-500 right-0 top-16 py-2 px-5 w-fit rounded-sm text-lg">
-            <UserMenuItem icon={MdPersonAdd} name="Kayıt Ol" onClick={()=>{}}/>
-            <UserMenuItem icon={MdLogin} name="Giriş Yap" onClick={()=>{}}/>
+            <UserMenuItem icon={MdPersonAdd} name="Kayıt Ol" onClick={()=>{dispatch(registerModalFunc())}}/>
+            <UserMenuItem icon={MdLogin} name="Giriş Yap" onClick={()=>{dispatch(loginModalFunc())}}/>
           
           </div>
         )
