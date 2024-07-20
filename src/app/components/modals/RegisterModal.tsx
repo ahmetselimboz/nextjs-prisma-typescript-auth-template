@@ -7,6 +7,8 @@ import Input from "../inputs/Input"
 import SocialMediaIcon from "../buttons/SocialMediaIcon";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const RegisterModal = () => {
     const {
@@ -21,8 +23,19 @@ const RegisterModal = () => {
             password: ""
         }
     })
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         console.log(data)
+
+        try {
+            const res = await axios.post("/api/register", data)
+            console.log(res)
+            dispatch(registerModalFunc())
+            toast.success("Kayıt Olma İşlemi Başarılı!!")
+        } catch (error) {
+            console.log(error)
+            toast.error("Bir Hata Oluştu Tekrar Deneyiniz!!")
+            
+        }
     }
 
     const {registerModal, } = useAppSelector((state) => state.modal)

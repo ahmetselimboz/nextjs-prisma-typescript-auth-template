@@ -6,7 +6,10 @@ import UserMenuItem from "./UserMenuItem";
 import { MdPersonAdd, MdLogin } from 'react-icons/md';
 import { useAppDispatch } from "@/app/redux/hooks";
 import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
-const UserMenu = () => {
+import { User } from "@prisma/client";
+import auth from "@/app/auth";
+
+const UserMenu = ({ user }: User | any | undefined) => {
 
   const [openMenu, setOpenMenu] = useState(false)
   const dispatch = useAppDispatch()
@@ -23,9 +26,25 @@ const UserMenu = () => {
       {
         openMenu && (
           <div className="absolute bg-gray-100 shadow-md shadow-gray-500 right-0 top-16 py-2 px-5 w-fit rounded-sm text-lg">
-            <UserMenuItem icon={MdPersonAdd} name="Kayıt Ol" onClick={()=>{dispatch(registerModalFunc())}}/>
-            <UserMenuItem icon={MdLogin} name="Giriş Yap" onClick={()=>{dispatch(loginModalFunc())}}/>
-          
+            {
+              user ? (
+                <>
+
+                  <UserMenuItem icon={MdPersonAdd} name="Liste Oluştur" onClick={() => { dispatch(registerModalFunc()) }} />
+                  <UserMenuItem icon={MdLogin} name="Profil" onClick={() => { dispatch(loginModalFunc()) }} />
+                  <UserMenuItem icon={MdLogin} name="Çıkış Yap" onClick={() => { auth.signOut }} />
+
+                </>
+              ) : (
+                <>
+
+                  <UserMenuItem icon={MdPersonAdd} name="Kayıt Ol" onClick={() => { dispatch(registerModalFunc()) }} />
+                  <UserMenuItem icon={MdLogin} name="Giriş Yap" onClick={() => { dispatch(loginModalFunc()) }} />
+
+                </>
+              )
+            }
+
           </div>
         )
       }
