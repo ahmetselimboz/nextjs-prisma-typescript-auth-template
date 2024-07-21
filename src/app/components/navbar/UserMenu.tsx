@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/app/redux/hooks";
 import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
 import { User } from "@prisma/client";
 import auth from "@/app/auth";
+import { credentialsSignOut } from "@/app/actions/getCurrentUser";
 
 const UserMenu = ({ user }: User | any | undefined) => {
 
@@ -32,7 +33,7 @@ const UserMenu = ({ user }: User | any | undefined) => {
 
                   <UserMenuItem icon={MdPersonAdd} name="Liste Oluştur" onClick={() => { dispatch(registerModalFunc()) }} />
                   <UserMenuItem icon={MdLogin} name="Profil" onClick={() => { dispatch(loginModalFunc()) }} />
-                  <UserMenuItem icon={MdLogin} name="Çıkış Yap" onClick={() => { auth.signOut }} />
+                  <UserMenuItem icon={MdLogin} name="Çıkış Yap" onClick={() => { credentialsSignOut() }} />
 
                 </>
               ) : (

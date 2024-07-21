@@ -22,7 +22,7 @@ export const authOptions: NextAuthConfig  = {
             authorize: async (credentials)  => {
                 try {
                     const { email, password } = credentials as { email: string; password: string };
-
+     
                     if (!email || !password) {
                         throw new Error("Bir Hata Oluştu!!")
                     }
@@ -61,7 +61,9 @@ export const authOptions: NextAuthConfig  = {
         signOut: "/",
         error: "/",
     },
-    secret: "6face40eeaff183da745038a1f11d8be" 
+    secret: "6face40eeaff183da745038a1f11d8be" ,
+
+    
     
 }
 

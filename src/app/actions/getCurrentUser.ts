@@ -1,5 +1,8 @@
+"use server"
+
 import prisma from "@/app/libs/prismadb"
 import auth from "../auth"
+
 
 
 export async function getSession() {
@@ -25,4 +28,28 @@ export default async function getCurrentUser() {
 
     return user;
 
+}
+
+
+export async function credentialsLogin(data: any) {
+    try {
+
+        const res = await auth.signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: false
+        })
+
+
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+export async function credentialsSignOut() {
+    try {
+        return auth.signOut()
+    } catch (error) {
+        console.log(error)
+    }
 }
