@@ -1,11 +1,11 @@
 "use client"
 import Image from "next/image";
 import { useState } from "react";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar,FaUser  } from "react-icons/fa";
 import UserMenuItem from "./UserMenuItem";
 import { MdPersonAdd, MdLogin } from 'react-icons/md';
 import { useAppDispatch } from "@/app/redux/hooks";
-import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
+import { elementModalFunc, loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
 import { User } from "@prisma/client";
 
 import { credentialsSignOut } from "@/app/actions/getCurrentUser";
@@ -21,7 +21,7 @@ const UserMenu = ({ user }: User | any | undefined) => {
       <FaRegStar size={25} className="text-yellow-500" />
       <div onClick={() => setOpenMenu(!openMenu)} className="w-[40px] h-[40px] rounded-full overflow-hidden border-2 border-gray-500 cursor-pointer">
 
-        <Image width={40} height={40} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
+        <Image width={40} height={40} src={user?.image || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" />
       </div>
 
 
@@ -32,7 +32,9 @@ const UserMenu = ({ user }: User | any | undefined) => {
               user ? (
                 <>
 
-                  <UserMenuItem icon={MdPersonAdd} name="Liste Oluştur" onClick={() => { dispatch(registerModalFunc(),setOpenMenu(!openMenu)) }} />
+                  <UserMenuItem icon={FaUser} name={user?.name} onClick={() => {}} />
+                    <hr />
+                  <UserMenuItem icon={MdPersonAdd} name="Liste Oluştur" onClick={() => { dispatch(elementModalFunc(),setOpenMenu(!openMenu)) }} />
                   <UserMenuItem icon={MdLogin} name="Profil" onClick={() => { dispatch(loginModalFunc(),setOpenMenu(!openMenu)) }} />
                   <UserMenuItem icon={MdLogin} name="Çıkış Yap" onClick={() => { signOut(),setOpenMenu(!openMenu) }} />
 

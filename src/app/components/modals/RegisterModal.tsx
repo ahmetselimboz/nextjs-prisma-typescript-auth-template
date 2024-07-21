@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 const RegisterModal = () => {
     const {
@@ -40,6 +42,9 @@ const RegisterModal = () => {
 
     const {registerModal, } = useAppSelector((state) => state.modal)
     const dispatch = useAppDispatch()
+
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl') || '/';
 
     const redirectFunc = ()=>{
         dispatch(loginModalFunc())
@@ -84,8 +89,8 @@ const RegisterModal = () => {
             <div>Ya da</div>
             <SocialMediaIcon
                 icon={FcGoogle}
-                btnTitle="Google"
-                onSubmit={() => { }}
+                btnTitle="Google ile Giriş"
+                onSubmit={() => { signIn('google', { callbackUrl })}}
             />
          
             <div className="">

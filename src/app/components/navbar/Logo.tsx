@@ -4,7 +4,7 @@ import Link from "next/link"
 
 const Logo = () => {
   return (
-    <Link href={"/"} className="text-4xl text-orange-600">Sahil.com</Link>
+    <Link href={"/"} className="text-4xl select-none text-orange-600">Sahil.com</Link>
   )
 }
 

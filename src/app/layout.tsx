@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google"
 import Navbar from "./components/navbar/Navbar"
 import MountedClient from "./components/MountedClient"
 import RegisterModal from "./components/modals/RegisterModal"
+import ElementModal from "./components/modals/ElementModal"
 import ReduxProvider from "./providers/ReduxProvider"
 import LoginModal from "./components/modals/LoginModal"
 import ToastProvider from "./providers/ToastProvider"
@@ -18,7 +19,7 @@ const newFont = Nunito({
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await useFetchCurrentUser()
 
-  console.log("Layout.tsx", user)
+
 
   return (
 
@@ -30,6 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ReduxProvider>
           <MountedClient>
             <ToastProvider/>
+            <ElementModal/>
             <RegisterModal />
             <LoginModal/>
             <Navbar user={user}/>

@@ -6,12 +6,14 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 interface ModalState {
     registerModal: boolean
     loginModal: boolean
+    elementModal: boolean
 }
 
 // Define the initial state using that type
 const initialState: ModalState = {
     registerModal: false,
     loginModal: false,
+    elementModal: false,
 }
 
 export const modalSlice = createSlice({
@@ -24,12 +26,15 @@ export const modalSlice = createSlice({
     },
     loginModalFunc: (state) => {
       state.loginModal = !state.loginModal
+    },
+    elementModalFunc: (state) => {
+      state.elementModal = !state.elementModal
     }
 
   },
 })
 
-export const { registerModalFunc, loginModalFunc } = modalSlice.actions
+export const { registerModalFunc, loginModalFunc, elementModalFunc } = modalSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 //export const selectCount = (state: RootState) => state.counter.value
