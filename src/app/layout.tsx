@@ -6,8 +6,9 @@ import RegisterModal from "./components/modals/RegisterModal"
 import ReduxProvider from "./providers/ReduxProvider"
 import LoginModal from "./components/modals/LoginModal"
 import ToastProvider from "./providers/ToastProvider"
-import getCurrentUser from "./actions/getCurrentUser"
 import { User } from "./types/UserProps"
+import useFetchCurrentUser from "./actions/getCurrentUser"
+import { useEffect, useState } from "react"
 
 const newFont = Nunito({
   subsets: ["latin"]
@@ -15,7 +16,9 @@ const newFont = Nunito({
 
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const user: any= await getCurrentUser();
+  const user = await useFetchCurrentUser()
+
+  console.log("Layout.tsx", user)
 
   return (
 

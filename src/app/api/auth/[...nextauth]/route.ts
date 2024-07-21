@@ -1,6 +1,7 @@
-import NextAuth, { NextAuthConfig } from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import Google from "next-auth/providers/google"
+
 import prisma from "@/app/libs/prismadb"
 import Credentials from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs"
@@ -10,19 +11,25 @@ interface CredentialsProps {
     password?: string;
 }
 
-export const authOptions: NextAuthConfig  = {
+export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as any,
     providers: [
-        Google,
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+            allowDangerousEmailAccountLinking: true
+
+
+        }),
         Credentials({
             credentials: {
-                email: { label: "email", type: "text" } ,
+                email: { label: "email", type: "text" },
                 password: { label: "password", type: "password" },
             },
-            authorize: async (credentials)  => {
+            authorize: async (credentials) => {
                 try {
                     const { email, password } = credentials as { email: string; password: string };
-     
+
                     if (!email || !password) {
                         throw new Error("Bir Hata Oluştu!!")
                     }
@@ -33,13 +40,13 @@ export const authOptions: NextAuthConfig  = {
                         }
                     })
 
-                  
+
                     if (!user || !user.hashedPassword) {
                         throw new Error("Bir hata durumu mevcut")
                     }
-                    
+
                     const comparePassword = await bcrypt.compare(password, user.hashedPassword)
-                    
+
                     if (!comparePassword) {
                         throw new Error("Bir hata durumu mevcut")
                     }
@@ -61,12 +68,25 @@ export const authOptions: NextAuthConfig  = {
         signOut: "/",
         error: "/",
     },
-    secret: "6face40eeaff183da745038a1f11d8be" ,
+    secret: process.env.NEXTAUTH_SECRET,
+    events: {
+        signIn: async (result) => {
+            console.log("Kullanıcı Giriş Yaptı:", result);
+        },
+        signOut: async () => {
+            console.log("Kullanıcı Çıkış Yaptı");
+        }
 
-    
-    
+    },
+
+
 }
 
-export default  NextAuth(authOptions)
+
+
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
 
 

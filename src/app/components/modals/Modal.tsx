@@ -7,6 +7,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
+  onClick?: () => void;
   btnLabel: string;
   title: string;
   bodyElement?: React.ReactElement;
@@ -28,6 +29,8 @@ const Modal: React.FC<ModalProps> = ({
 
   const submitFunc = () => {
     onSubmit();
+
+ 
   };
 
   if(!isOpen){

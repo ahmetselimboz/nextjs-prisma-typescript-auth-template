@@ -7,11 +7,11 @@ import Modal from "./Modal"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { loginModalFunc, registerModalFunc } from "@/app/redux/modalSlice";
-import auth from "@/app/auth";
-import { useRouter } from "next/navigation";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react"
-import { credentialsLogin } from "@/app/actions/getCurrentUser";
+
 
 const LoginModal = () => {
 
@@ -38,12 +38,18 @@ const LoginModal = () => {
     dispatch(registerModalFunc())
   }
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
 
 
-    const result = await credentialsLogin(data);
+    const result = await signIn('credentials', {
+      ...data,
+      redirect: false
+    });
 
-    if (result) {
+    if (result?.ok) {
       dispatch(loginModalFunc())
       router.refresh()
       toast.success("Giriş İşlemi Başarılı!!")
@@ -87,7 +93,8 @@ const LoginModal = () => {
       <SocialMediaIcon
         icon={FcGoogle}
         btnTitle="Google"
-        onSubmit={() => { }}
+        onSubmit={() => { signIn('google', { callbackUrl }) }}
+
       />
 
       <div className="">

@@ -1,54 +1,46 @@
-"use server"
+
 
 import prisma from "@/app/libs/prismadb"
-import auth from "../auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { signIn, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
 
-
-
-export async function getSession() {
-    return await auth.auth()
+export async function getSession(){
+    return await getServerSession()
 }
 
-export default async function getCurrentUser() {
-    const session = await getSession()
-    if (!session?.user?.email) {
-        return null
-    }
 
+
+
+
+export default async function useFetchCurrentUser() {
+    const session = await getSession();
+    if (!session?.user?.email) {
+        return null;
+    }
 
     const user = await prisma.user.findUnique({
-        where: {
-            email: session?.user?.email
-        }
-    })
-
-    if (!user) {
-        return null
-    }
+        where: { email: session.user.email }
+    });
 
     return user;
-
 }
 
 
-export async function credentialsLogin(data: any) {
+export async function credentialsSignOut() {
     try {
-
-        const res = await auth.signIn("credentials", {
-            email: data.email,
-            password: data.password,
-            redirect: false
-        })
-
-
-        return res
+        return signOut()
     } catch (error) {
         console.log(error)
     }
 }
-export async function credentialsSignOut() {
+export async function credentialsGoogle() {
     try {
-        return auth.signOut()
+        signIn("Google")
+
+
+        return null
     } catch (error) {
         console.log(error)
     }
