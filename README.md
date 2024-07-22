@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js TypeScript Prisma MongoDB Starter
+
+A boilerplate project for building full-stack applications using Next.js, TypeScript, Prisma, and MongoDB.
+
+## Features
+
+- **Next.js** for server-side rendering and static site generation
+- **TypeScript** for type-safe JavaScript
+- **Prisma** as ORM for database management
+- **MongoDB** as the database
+- **Tailwind CSS** for utility-first CSS
+- **NextAuth.js** for authentication with Google and credentials
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js
+- MongoDB
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```bash
+    git clone https://github.com/ahmetselimboz/next-typescript-prisma-mongodb-fullstack-project.git
+    cd next-typescript-prisma-mongodb-fullstack-project
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Set up the environment variables:
+
+    Create a `.env` file in the root directory and add your MongoDB connection string and authentication secrets.
+
+    ```plaintext
+    DATABASE_URL="your_mongodb_connection_string"
+    NEXTAUTH_SECRET="your_nextauth_secret"
+    GOOGLE_CLIENT_ID="your_google_client_id"
+    GOOGLE_CLIENT_SECRET="your_google_client_secret"
+    ```
+
+4. Run Prisma migrations to set up the database schema:
+
+    ```bash
+    npx prisma migrate dev
+    ```
+
+5. Start the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+6. Open [http://localhost:3000](http://localhost:3000) to see the application in action.
+
+## Authentication
+
+This project uses NextAuth.js for authentication. It supports both Google and credentials-based authentication.
+
+### Google Authentication
+
+To enable Google authentication, set the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` environment variables in your `.env` file.
+
+### Credentials Authentication
+
+For credentials authentication, users can sign up and log in with a username and password.
+
+## Project Structure
+
+- `src/` - Application source code
+  - `pages/` - Next.js pages
+  - `components/` - React components
+  - `styles/` - Global and component-specific styles
+  - `lib/` - Utility functions and libraries
+  - `hooks/` - Custom React hooks
+- `prisma/` - Prisma schema and migrations
+- `public/` - Public assets and static files
+
+## Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm start` - Start the production server
+- `npm run lint` - Run ESLint for code quality
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Prisma Documentation](https://www.prisma.io/docs/)
+- [MongoDB Documentation](https://docs.mongodb.com/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Contributions are welcome! Please open an issue or submit a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License.
