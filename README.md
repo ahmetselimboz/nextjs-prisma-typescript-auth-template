@@ -1,6 +1,6 @@
 # Next.js TypeScript Prisma MongoDB Starter
 
-A boilerplate project for building full-stack applications using Next.js, TypeScript, Prisma, and MongoDB.
+A boilerplate project for building full-stack applications using Next.js, TypeScript, Prisma, MongoDB, and Redux.
 
 ## Features
 
@@ -10,6 +10,7 @@ A boilerplate project for building full-stack applications using Next.js, TypeSc
 - **MongoDB** as the database
 - **Tailwind CSS** for utility-first CSS
 - **NextAuth.js** for authentication with Google and credentials
+- **Redux** for state management
 
 ## Getting Started
 
@@ -73,11 +74,13 @@ For credentials authentication, users can sign up and log in with a username and
 ## Project Structure
 
 - `src/` - Application source code
-  - `pages/` - Next.js pages
   - `components/` - React components
-  - `styles/` - Global and component-specific styles
-  - `lib/` - Utility functions and libraries
-  - `hooks/` - Custom React hooks
+  - `pages/` - Next.js pages
+  - `styles/` - Global styles
+  - `redux/` - Redux setup and slices
+  - `utils/` - Utility functions
+  - `hooks/` - Custom hooks
+
 - `prisma/` - Prisma schema and migrations
 - `public/` - Public assets and static files
 
@@ -98,6 +101,13 @@ To learn more about the technologies used in this project, check out the followi
 - [MongoDB Documentation](https://docs.mongodb.com/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction)
+- [Redux Documentation](https://redux.js.org/introduction/getting-started)
+
+
+## Thumbnail
+
+![Uygulama Ekran Görüntüsü](https://image.ahmetselimboz.com.tr/github/nextjs-ts-prisma-mongo-starter.jpg)
+
 
 ## Contributing
 
