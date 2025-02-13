@@ -1,4 +1,4 @@
-![Uygulama Ekran Görüntüsü](https://image.ahmetselimboz.com.tr/github/nextjs-ts-prisma-mongo-starter.jpg)
+![Uygulama Ekran Görüntüsü](https://cdn.ahmetselimboz.com/images/nextjs-ts-prisma-mongo-starter.jpg)
 
 # Next.js Prisma TypeScript Auth Template
 
